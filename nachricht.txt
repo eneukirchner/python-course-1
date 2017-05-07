@@ -1,0 +1,2 @@
+Das ist eine Textnachricht mit möglichen Umlauten.
+
