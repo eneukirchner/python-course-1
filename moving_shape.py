@@ -8,7 +8,7 @@ SCREEN_WIDTH = 500
 SCREEN_HEIGHT = 600
 BALL_RADIUS = 20
 BOUNCINESS = 0.8
-GRAVITY = 0.9
+GRAVITY = 10
 
 
 class MyApplication(arcade.Window):
@@ -28,7 +28,7 @@ class MyApplication(arcade.Window):
         # You can change how often the animate() method is called by using the
         # set_update_rate() method in the parent class.
         # The default is once every 1/80 of a second.
-        self.set_update_rate(1/1000)
+        # self.set_update_rate(1/10)
 
     def on_draw(self):
         """
@@ -56,6 +56,8 @@ class MyApplication(arcade.Window):
         """
         # Move the ball
         self.ball_y_position += self.ball_y_pixels_per_second * delta_time
+        self.ball_y_pixels_per_second -= GRAVITY
+        print("{:+8.2f}".format(self.ball_y_pixels_per_second))
 
         # Did the ball hit the right side of the screen while moving right?
         if self.ball_y_position > SCREEN_HEIGHT - BALL_RADIUS \
@@ -67,7 +69,7 @@ class MyApplication(arcade.Window):
                 and self.ball_y_pixels_per_second < 0:
             self.ball_y_pixels_per_second *= -BOUNCINESS
 
-        self.ball_y_pixels_per_second -= GRAVITY
+        
 
 
 def main():
