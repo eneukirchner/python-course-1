@@ -1,39 +1,55 @@
 #!/usr/bin/env python3
 import math
-
-# Klassendefinition
+"""
+    Geometrical Shapes
+"""
 class Shape:
-    # Konstruktor
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        # print(self)
+    """
+    Base Class for all shapes
+    """
+    def __init__(self, w = 5, l = 3):
+        self.width = w
+        self.length = l
 
-    # Methode
-    def set_dimensions(self, width, height):
-        self.width = width
-        self.height = height
+    def show(self):
+        print("Width =", self.width, "Length =", self.length)
 
-# Abgeleitete Klasse
+    def set(self, w, l):
+        self.width = w
+        self.length = l
+
 class Rectangle(Shape):
+    """
+    Rectangle Class
+    """
     def area(self):
-        print("Fläche Rechteck = ", round(self.width * self.height, 2))
-        
+        print("Area Rectangle =", self.width * self.length)
 
 class Ellipse(Shape):
+    """
+    Ellipse Class
+    """
     def area(self):
-        print("Fläche Ellipse = ", round(self.width * self.height * math.pi, 2))
+        print("Area Ellipse =", round(self.width * self.length * math.pi, 2))
+
+def main():
+    shape_list = []
+    shape_list.append(Rectangle(10, 5))
+    shape_list.append(Rectangle(2, 4))
+    shape_list.append(Ellipse(10, 3))
+
+    for shape in shape_list:
+        shape.show()
+        shape.area()
+
+if __name__ == "__main__":
+    main()
 
 
-# Objekte: r1, e1
-r1 = Rectangle(4, 5)
-r1.area()
 
-r1.set_dimensions(40, 50)
-r1.area()
 
-e1 = Ellipse(10, 100)
-e1.area()
+    
 
-# Objekterstellung und Anwendung einer Methode als Einzeiler
-Rectangle(2, 3).area()
+
+        
+        
