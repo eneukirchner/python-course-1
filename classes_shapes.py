@@ -13,6 +13,7 @@ SCREEN_HEIGHT = 600
 
 
 class Shape():
+    """ Base Class for all shapes """
 
     def __init__(self, x, y, width, height, color):
         self.x = x
@@ -23,6 +24,7 @@ class Shape():
 
 
 class Ellipse(Shape):
+    """ Ellipse Class """
 
     def draw(self):
         arcade.draw_ellipse_filled(self.x, self.y, self.width, self.height,
@@ -30,6 +32,7 @@ class Ellipse(Shape):
 
 
 class Rectangle(Shape):
+    """ Rectangle Class """
 
     def draw(self):
         arcade.draw_rectangle_filled(self.x, self.y, self.width, self.height,
@@ -42,18 +45,26 @@ class MyApplication(arcade.Window):
     def __init__(self, width, height, title):
         super().__init__(width, height, title)
         arcade.set_background_color(arcade.color.WHITE)
+        self.shape_list = []
 
     def on_draw(self):
         """
         Render the screen.
         """
         arcade.start_render()
-
-        shape1 = Rectangle(200, 100, 200, 100, arcade.color.BLUE)
-        shape2 = Ellipse(400, 300, 300, 100, arcade.color.RED)
-
-        shape1.draw()
-        shape2.draw()
         
-window = MyApplication(SCREEN_WIDTH, SCREEN_HEIGHT, title="Shapes!")
-arcade.run()
+        self.shape_list.append(Rectangle(200, 100, 200, 100, arcade.color.BLUE))
+        self.shape_list.append(Ellipse(400, 300, 300, 100, arcade.color.RED))
+        self.shape_list.append(Ellipse(500, 500, 100, 50, arcade.color.GREEN))
+
+        for shape in self.shape_list:
+            shape.draw()
+        
+def main():
+    window = MyApplication(SCREEN_WIDTH, SCREEN_HEIGHT, title="Shapes!")
+    arcade.run()
+
+if __name__ == "__main__":
+    main()
+
+
