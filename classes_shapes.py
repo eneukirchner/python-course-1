@@ -46,17 +46,15 @@ class MyApplication(arcade.Window):
         super().__init__(width, height, title)
         arcade.set_background_color(arcade.color.WHITE)
         self.shape_list = []
+        self.shape_list.append(Rectangle(200, 100, 200, 100, arcade.color.BLUE))
+        self.shape_list.append(Ellipse(400, 300, 300, 100, arcade.color.RED))
+        self.shape_list.append(Ellipse(500, 500, 100, 50, arcade.color.GREEN))
 
     def on_draw(self):
         """
         Render the screen.
         """
-        arcade.start_render()
-        
-        self.shape_list.append(Rectangle(200, 100, 200, 100, arcade.color.BLUE))
-        self.shape_list.append(Ellipse(400, 300, 300, 100, arcade.color.RED))
-        self.shape_list.append(Ellipse(500, 500, 100, 50, arcade.color.GREEN))
-
+        arcade.start_render()   
         for shape in self.shape_list:
             shape.draw()
         
