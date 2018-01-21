@@ -14,21 +14,30 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
+# Screen size
+SIZEX = 700;
+SIZEY = 500
+
 class Rectangle():
     """
     Rechteck-Klasse mit Farbe, Ort (x, y), Breite und Hoehe
     """
-    def __init__(self, color, x, y, h, w):
+    def __init__(self, color, x, y, w, h):
         self.color = color
         self.x = x
         self.y = y
-        self.h = h
         self.w = w
+        self.h = h
 
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, [self.x, self.y, self.h, self.w])
 
     def move(self, delta_x, delta_y):
+        if self.x + delta_x >= SIZEX - self.w or self.x + delta_x <= 0:
+            delta_x *= -1
+        if self.y + delta_y >= SIZEY -self.h or self.y + delta_y <= 0:
+            delta_y *= -1
+            
         self.x += delta_x
         self.y += delta_y
         
@@ -38,7 +47,7 @@ class Ellipse(Rectangle):
     """
 
     def draw(self, screen):
-        pygame.draw.ellipse(screen, self.color, [self.x, self.y, self.h, self.w])
+        pygame.draw.ellipse(screen, self.color, [self.x, self.y, self.w, self.h])
 
 
 def main():
@@ -67,7 +76,7 @@ def main():
     pygame.init()
      
     # Set the width and height of the screen [width, height]
-    size = (700, 500)
+    size = (SIZEX, SIZEY)
     screen = pygame.display.set_mode(size)
      
     pygame.display.set_caption("Pygame Example")
@@ -97,8 +106,8 @@ def main():
         screen.fill(WHITE)
         for obj in my_list:
             obj.draw(screen)
-            dx = randint(-5, 5)
-            dy = randint(-5, 5)
+            dx = randint(-3, 3)
+            dy = randint(-3, 3)
             obj.move(dx, dy)
         # --- Drawing code should go here
      
